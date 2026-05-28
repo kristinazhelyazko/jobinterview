@@ -1,0 +1,28 @@
+{
+  "name": "interview-zoom",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "migrate:default-questions": "tsx scripts/migrate-default-questions.ts",
+    "setup:supabase:postgres": "tsx scripts/apply-supabase-postgres.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.106.2",
+    "dotenv": "^17.4.2",
+    "next": "16.2.6",
+    "pg": "^8.21.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/pg": "^8.20.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tsx": "^4.22.3",
+    "typescript": "^5"
+  }
+}
