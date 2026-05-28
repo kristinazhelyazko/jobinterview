@@ -12,7 +12,11 @@ function getConnectionString() {
 
 export function getPgPool() {
   if (!pool) {
-    const connectionString = getConnectionString();
+    let connectionString = getConnectionString();
+    // If sslmode is embedded in URL, pg can override ssl object options.
+    // We keep TLS enabled explicitly via the ssl object below.
+    connectionString = connectionString.replace(/[?&]sslmode=require/gi, "");
+
     const isLocalConnection =
       connectionString.includes("localhost") || connectionString.includes("127.0.0.1");
 
