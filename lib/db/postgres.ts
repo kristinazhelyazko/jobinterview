@@ -4,14 +4,10 @@ let pool: Pool | null = null;
 
 function getConnectionString() {
   const fromEnv = process.env.DATABASE_URL;
-  if (fromEnv) return fromEnv;
-
-  const password = process.env.SUPABASE_PASSWORD;
-  if (!password) {
-    throw new Error("Missing SUPABASE_PASSWORD (or DATABASE_URL) for PostgreSQL connection.");
+  if (!fromEnv) {
+    throw new Error("Missing DATABASE_URL for PostgreSQL connection.");
   }
-
-  return `postgresql://postgres:${encodeURIComponent(password)}@db.rqiylhtojgbbqydzitfw.supabase.co:5432/postgres`;
+  return fromEnv;
 }
 
 export function getPgPool() {
