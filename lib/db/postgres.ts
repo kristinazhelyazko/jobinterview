@@ -16,9 +16,14 @@ function getConnectionString() {
 
 export function getPgPool() {
   if (!pool) {
+    const connectionString = getConnectionString();
+    const isLocalConnection =
+      connectionString.includes("localhost") || connectionString.includes("127.0.0.1");
+
     pool = new Pool({
-      connectionString: getConnectionString(),
-      ssl: false,
+      connectionString,
+      // Supabase managed Postgres requires TLS in cloud runtimes (e.g. Vercel).
+      ssl: isLocalConnection ? false : { rejectUnauthorized: false },
       max: 5,
     });
   }

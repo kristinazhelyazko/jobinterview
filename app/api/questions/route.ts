@@ -88,8 +88,9 @@ export async function GET() {
     });
   } catch (error) {
     console.error(error);
+    const details = error instanceof Error ? error.message : "Unknown server error";
     return NextResponse.json(
-      { error: "Failed to load questions from Supabase. Check env vars and database schema." },
+      { error: "Failed to load questions from Supabase. Check env vars and database schema.", details },
       { status: 500 },
     );
   }
